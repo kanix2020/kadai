@@ -6,6 +6,13 @@
   align-items: center;
 }
 
+.check-content{
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin:30px 30px;
+}
+
 .small-field, .large-field {
   width: 800px;
   font-size: 16px;
@@ -23,7 +30,7 @@
   margin: 0 auto 30px;
 }
 
-.send {
+.btn {
   width: 200px;
   margin: 0 auto;
   padding: 15px;
@@ -31,10 +38,10 @@
   background-color: lightblue;
   color:white;
   display: block;
+  border-radius: 10px;
+  cursor: pointer;
 }
 
-/* フッター */
-footer {
-  height: 50px;
-  background-color: #f0f0f0;
+.send-ok{
+  text-align: center;
 }
