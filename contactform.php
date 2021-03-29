@@ -1,14 +1,40 @@
 <?php
   session_start();
   $mode = 'input';
+  $errormessage = array();
   if( isset($_POST['back']) && $_POST['back'] ){
     //戻る
   } else if( isset($_POST['confirm']) && $_POST['confirm'] ){
+    //確認画面
+    if( !$_POST['fullname'] ){
+      $errormessage[] = "名前を入力してください";
+    } else if( mb_strlen($_POST['fullname']) > 50 ){
+      $errormessage[] = "名前は50文字以内にしてください";
+    }
+    $_SESSION['fullname'] = htmlspecialchars($_POST['fullname'], ENT_QUOTES);
+
+    if( !$_POST['email'] ){
+      $errormessage[] = "Eメールを入力してください";
+    } else if( mb_strlen($_POST['email']) > 50 ){
+      $errormessage[] = "Eメールは50文字以内にしてください";
+    } else if( !filter_var($_POST['email'], FILTER_VALIDATE_EMAIL)){
+      $errormessage[] = "メールアドレスが不正です";
+    }
+    $_SESSION['email'] = htmlspecialchars($_POST['email'], ENT_QUOTES);
+
+    if( !$_POST['message'] ){
+      $errormessage[] = "メッセージを入力してください";
+    } else if( mb_strlen($_POST['message']) > 50 ){
+      $errormessage[] = "お問い合わせ内容は500文字以内にしてください";
+    }
+    $_SESSION['message'] = htmlspecialchars($_POST['message'], ENT_QUOTES);
+
     $_SESSION['prifecture'] = $_POST['prifecture'];
-    $_SESSION['fullname'] = $_POST['fullname'];
-    $_SESSION['email']    = $_POST['email'];
-    $_SESSION['message']  = $_POST['message'];
-    $mode = 'confirm';
+    if ( $errormessage ){
+      $mode = 'input';
+    } else {
+      $mode = 'confirm';
+    }
   } else if( isset($_POST['send']) && $_POST['send'] ){
     // メール送信
     // $message = "お問い合わせを受け付けました \r\n"
@@ -38,6 +64,14 @@
   <body>
     <?php if( $mode == 'input'){ ?>
       <!-- 入力画面 -->
+      <?php 
+        if( $errormessage ){
+          echo '<div style="color:red;">';
+          echo implode('<br>', $errormessage );
+          echo '</div>';
+        }
+      ?>
+
       <div class="bottom-content">
         <form action="./contactform.php" method="post" class="contact-form">
           <h2 class="heading-name">お問い合わせ</h2>
