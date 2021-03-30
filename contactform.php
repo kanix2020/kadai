@@ -75,15 +75,27 @@
       <div class="bottom-content">
         <form action="./contactform.php" method="post" class="contact-form">
           <h2 class="heading-name">お問い合わせ</h2>
+          <p>お名前</p>
+          <input type="text" placeholder="名前" name="fullname" value="<?php echo $_SESSION['fullname'] ?>" class="small-field">
+          <p>連絡先</p>
+          <input type="e-mail" placeholder="メールアドレス" name="email" value="<?php echo $_SESSION['email'] ?>" class="small-field">
+          <input type="text" placeholder="電話番号" name="tel" value="<?php echo $_SESSION['tel'] ?>" class="small-field">
+          <p>お問い合わせ内容</p>
+          <textarea placeholder="内容"  rows="10" name="message" class="large-field"><?php echo $_SESSION['message'] ?></textarea>
+          <p>ご希望の返答期間</p>
           <select name=prifecture size=”3″ value="<?php echo $_SETTION['prifecture'] ?>">
             <option value=”″>--</option>
-            <option value=”東京″>東京</option>
-            <option value=”沖縄″>沖縄</option>
-            <option value=”埼玉″>埼玉</option>
+            <option value=”お急ぎ″>お急ぎ</option>
+            <option value=”今週中″>3~5営業日後</option>
           </select><br>
-          <input type="text" placeholder="名前" name="fullname" value="<?php echo $_SESSION['fullname'] ?>" class="small-field">
-          <input type="e-mail" placeholder="メールアドレス" name="email" value="<?php echo $_SESSION['email'] ?>" class="small-field">
-          <textarea placeholder="お問い合わせ内容"  rows="10" name="message" class="large-field"><?php echo $_SESSION['message'] ?></textarea>
+            ※当日中にご確認して頂きたい場合は、お手数ですがお電話をお願い致します。xxx-xxx-xxxx
+          <p>ご希望の返信方法</p>
+          <input type="radio" name="contact" value="電話" />電話
+          <input type="radio" name="contact" value="メール" />メール
+          <p>興味がある分野</p>
+          <input type="checkbox" name="interested[]" value="A" />A
+          <input type="checkbox" name="interested[]" value="B" />B
+          <input type="checkbox" name="interested[]" value="C" />C
           <input type="submit" name="confirm" value="確認" class="btn" />
         </form>
       </div>
