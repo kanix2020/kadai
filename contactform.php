@@ -6,13 +6,8 @@
   if( isset($_POST['back']) && $_POST['back'] ){
     //戻る
   } else if( isset($_POST['confirm']) && $_POST['confirm'] ){
-    //エラーメッセージ内容
+    //エラーメッセージ内容格納
     require 'error_form.php';
-
-    if (isset($_POST["interested"])){
-      $interested = implode('と', $_POST["interested"]);
-    }
-    $_SESSION['interested'] = htmlspecialchars($_POST['interested'], ENT_QUOTES);
 
     //エラーメッセージ表示
    if ( $errormessage ){
@@ -27,7 +22,6 @@
     //          . "名前:" . $_SESSION['email'] . "\r\n"
     //          . "email:" . $_SESSION['phone'] . "\r\n"
     //          . "email:" . $_SESSION['message'] . "\r\n"
-    //          . "email:" . $_SESSION['interested'] . "\r\n"
     //          . "email:" . $_SESSION['henshin'] . "\r\n"
     //          . "email:" . $_SESSION['response'] . "\r\n"
     //          . "お問い合わせ内容:\r\n"
@@ -41,10 +35,15 @@
     $_SESSION['email']    = '';
     $_SESSION['phone']    = '';
     $_SESSION['message']  = '';
-    $_SESSION['interested'] = '';
     $_SESSION['henshin'] = '';
     $_SESSION['response'] = '';
   }
+  
+  //興味のある分野（任意）
+  // if( is_null(!$_POST['interested'])){
+    $interested = implode('と', $_POST['interested']);
+  // }
+  
 ?>
 <!DOCTYPE html>
 <html lang="ja">
@@ -102,9 +101,9 @@
           お問い合わせ内容 <?php echo nl2br($_SESSION['message']) ?> <br>
           返答期間 <?php echo $_SESSION['response'] ?> <br>
           ご希望の返信方法 <?php echo $_SESSION['henshin'] ?> <br>
-          興味がある分野 <?php echo $_SESSION['interested'] ?> <br>
+          興味がある分野 <?php echo $interested ?> <br>
         </div>  
-        <input type="submit" name="send" value="SEND" class="btn" />
+        <input type="submit" name="send" value="SEND" class="btn">
         <input type="submit" name="back" value="戻る" class="btn">
       </form>
     <?php } else { ?>
