@@ -6,7 +6,7 @@
   if( isset($_POST['back']) && $_POST['back'] ){
     //戻る
   } else if( isset($_POST['confirm']) && $_POST['confirm'] ){
-    //エラーメッセージ内容格納
+    //エラーメッセージ内容（「error_form.php」呼び出し）
     require 'error_form.php';
 
     //エラーメッセージ表示
@@ -18,12 +18,11 @@
   } else if( isset($_POST['send']) && $_POST['send'] ){
     // メール送信
     // $message = "お問い合わせを受け付けました \r\n"
-    //          . "県名:" . $_SESSION['fullname'] . "\r\n"
-    //          . "名前:" . $_SESSION['email'] . "\r\n"
-    //          . "email:" . $_SESSION['phone'] . "\r\n"
-    //          . "email:" . $_SESSION['message'] . "\r\n"
-    //          . "email:" . $_SESSION['henshin'] . "\r\n"
-    //          . "email:" . $_SESSION['response'] . "\r\n"
+    //          . "名前:" . $_SESSION['fullname'] . "\r\n"
+    //          . "メール:" . $_SESSION['email'] . "\r\n"
+    //          . "電話番号:" . $_SESSION['phone'] . "\r\n"
+    //          . "返信方法:" . $_SESSION['henshin'] . "\r\n"
+    //          . "返答期間:" . $_SESSION['response'] . "\r\n"
     //          . "お問い合わせ内容:\r\n"
     //          . preg_replace("/\r\n|\r|\n/", "\r\n", $_SESSION['message']);
     // mail($_SESSION['email'], 'お問い合わせありがとうございます。', $message);
@@ -38,11 +37,8 @@
     $_SESSION['henshin'] = '';
     $_SESSION['response'] = '';
   }
-  
   //興味のある分野（任意）
-  // if( is_null(!$_POST['interested'])){
     $interested = implode('と', $_POST['interested']);
-  // }
   
 ?>
 <!DOCTYPE html>

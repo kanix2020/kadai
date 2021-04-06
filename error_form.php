@@ -1,5 +1,5 @@
 <?php
-  //バリデーション
+  //エラー文格納
   if( !$_POST['fullname'] ){
     $errormessage[] = "名前を入力してください";
   } else if( mb_strlen($_POST['fullname']) > 50 ){
