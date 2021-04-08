@@ -3,6 +3,7 @@
   $mode = 'input';
   //バリデーション
   $errormessage = array();
+  ・・コメント
   if( isset($_POST['back']) && $_POST['back'] ){
     //戻る
   } else if( isset($_POST['confirm']) && $_POST['confirm'] ){
